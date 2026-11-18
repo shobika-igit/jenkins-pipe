@@ -14,15 +14,15 @@ pipeline {
 
         stage('Compile') {
             steps {
-                bat 'if not exist out mkdir out'
-                bat 'javac -d out src\\main\\java\\org\\example\\Main.java'
+                sh 'mkdir -p out'
+                sh 'javac -d out src/main/java/org/example/Main.java'
             }
         }
 
 
         stage('Execute') {
             steps {
-                bat 'java -cp out org.example.Main 121'
+                sh 'java -cp out org.example.Main 121'
             }
         }
     }
