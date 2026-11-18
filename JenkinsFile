@@ -3,6 +3,8 @@ pipeline {
 
 
     stages {
+
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -12,15 +14,15 @@ pipeline {
 
         stage('Compile') {
             steps {
-                bat 'mkdir out 2>nul'
-                bat 'javac -d out src\\Main.java'
+                bat 'if not exist out mkdir out'
+                bat 'javac -d out src\\main\\java\\org\\example\\Main.java'
             }
         }
 
 
         stage('Execute') {
             steps {
-                bat 'java -cp out Main 121'
+                bat 'java -cp out org.example.Main 121'
             }
         }
     }
