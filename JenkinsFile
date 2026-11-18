@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+
+        stage('Compile') {
+            steps {
+                bat 'mkdir out 2>nul'
+                bat 'javac -d out src\\Main.java'
+            }
+        }
+
+
+        stage('Execute') {
+            steps {
+                bat 'java -cp out Main 121'
+            }
+        }
+    }
+}
