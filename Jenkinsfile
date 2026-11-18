@@ -3,8 +3,6 @@ pipeline {
 
 
     stages {
-
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -14,15 +12,19 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh 'mkdir -p out'
-                sh 'javac -d out src/main/java/org/example/Main.java'
+                sh '''
+                mkdir -p out
+                /usr/lib/jvm/java-17-openjdk-amd64/bin/javac -d out src/main/java/org/example/Main.java
+                '''
             }
         }
 
 
         stage('Execute') {
             steps {
-                sh 'java -cp out org.example.Main 121'
+                sh '''
+                /usr/lib/jvm/java-17-openjdk-amd64/bin/java -cp out org.example.Main 121
+                '''
             }
         }
     }
